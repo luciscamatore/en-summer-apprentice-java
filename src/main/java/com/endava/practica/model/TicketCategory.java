@@ -13,7 +13,7 @@ public class TicketCategory implements Serializable {
     private Integer TicketCategoryID;
 
     @ManyToOne
-    @MapsId("EventID")
+    @JoinColumn(name = "EventID")
     private Event EventID;
 
     @Column(name = "Price")
@@ -22,8 +22,6 @@ public class TicketCategory implements Serializable {
     @Column(name = "Description")
     private String Description;
 
-//    @OneToMany(mappedBy = "TicketCategoryID")
-//    private List<TicketCategory> TicketCategories;
 
     public Integer getTicketCategoryID() {
         return TicketCategoryID;

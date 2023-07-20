@@ -15,9 +15,6 @@ public class EventType implements Serializable {
     @Column(name = "EventTypeName")
     private String EventTypeName;
 
-//    @OneToMany(mappedBy = "EventTypeID")
-//    private List<Event> events;
-
     public Integer getEventTypeID() {
         return eventTypeID;
     }

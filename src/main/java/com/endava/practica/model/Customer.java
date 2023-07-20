@@ -18,8 +18,6 @@ public class Customer implements Serializable {
     @Column(name = "Email")
     private String Email;
 
-//    @OneToMany(mappedBy = "CustomerID")
-//    private List<Customer> customers;
     public Integer getCustomerID() {
         return CustomerID;
     }

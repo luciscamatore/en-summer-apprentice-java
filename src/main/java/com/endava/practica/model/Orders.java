@@ -13,11 +13,11 @@ public class Orders implements Serializable {
     private Integer OrderID;
 
     @ManyToOne
-    @MapsId("CustomerID")
+    @JoinColumn(name = "CustomerID")
     private Customer CustomerID;
 
     @ManyToOne
-    @MapsId("TicketCategoryID")
+    @JoinColumn(name = "TicketCategoryID")
     private TicketCategory TicketCategoryID;
 
     @Column(name = "OrderedAt")

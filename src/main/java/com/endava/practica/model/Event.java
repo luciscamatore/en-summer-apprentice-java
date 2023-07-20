@@ -15,11 +15,11 @@ public class Event implements Serializable {
     @Column(name = "EventID")
     private Integer eventID;
     @ManyToOne
-    @MapsId("VenueID")
+    @JoinColumn(name = "VenueID")
     private Venue VenueID;
 
     @ManyToOne
-    @MapsId("EventTypeID")
+    @JoinColumn(name = "EventTypeID")
     private EventType EventTypeID;
 
     @Column(name = "EventDescription")
@@ -34,8 +34,6 @@ public class Event implements Serializable {
     @Column(name = "EndDate")
     private LocalDateTime EndDate;
 
-//    @OneToMany(mappedBy = "TicketCategoryID")
-//    private List<TicketCategory> TicketCategories;
     public Integer getEventID() {
         return eventID;
     }

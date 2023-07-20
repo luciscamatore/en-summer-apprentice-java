@@ -17,13 +17,14 @@ import java.util.List;
 public class EventController {
 
     @Autowired
-    EventRepository eventRepository;
-
-    @Autowired
     EventService eventService;
 
-    @GetMapping("/events")
-    public ResponseEntity<Event> getEventByID(@RequestParam(required = false) Integer EventID){
-        return  eventService.getEventByID(EventID);
+//    @GetMapping("/event")
+//    public List<String> getEventByVenueIDandEventType(Integer VenueID, String EventType){
+//        return eventService.getEventByVenueIDandEventType(VenueID, EventType);
+//    }
+    @GetMapping("/allev")
+    public List<Event> getAllEvents(){
+        return eventService.getAllEvents();
     }
 }
