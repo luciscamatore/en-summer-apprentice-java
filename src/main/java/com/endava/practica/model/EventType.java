@@ -13,7 +13,7 @@ public class EventType implements Serializable {
     private Integer eventTypeID;
 
     @Column(name = "EventTypeName")
-    private String EventTypeName;
+    private String eventTypeName;
 
     public Integer getEventTypeID() {
         return eventTypeID;
@@ -24,11 +24,11 @@ public class EventType implements Serializable {
     }
 
     public String getEventTypeName() {
-        return EventTypeName;
+        return eventTypeName;
     }
 
     public void setEventTypeName(String eventTypeName) {
-        EventTypeName = eventTypeName;
+        this.eventTypeName = eventTypeName;
     }
 
     public EventType() {

@@ -10,50 +10,50 @@ import java.util.List;
 public class Venue implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer VenueID;
+    private Integer venueID;
 
     @Column(name = "Location")
-    private String Location;
+    private String location;
 
     @Column(name = "Type")
-    private String Type;
+    private String type;
 
     @Column(name = "Capacity")
-    private int Capacity;
+    private int capacity;
 
 //    @OneToMany(mappedBy = "VenueID")
 //    private List<Event> venues;
 
     public Integer getVenueID() {
-        return VenueID;
+        return venueID;
     }
 
     public void setVenueID(Integer venueID) {
-        VenueID = venueID;
+        this.venueID = venueID;
     }
 
     public String getLocation() {
-        return Location;
+        return location;
     }
 
     public void setLocation(String location) {
-        Location = location;
+        this.location = location;
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
     public void setType(String type) {
-        Type = type;
+        this.type = type;
     }
 
     public int getCapacity() {
-        return Capacity;
+        return capacity;
     }
 
     public void setCapacity(int capacity) {
-        Capacity = capacity;
+        this.capacity = capacity;
     }
 
     public Venue() {

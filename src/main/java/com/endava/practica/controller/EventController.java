@@ -19,10 +19,10 @@ public class EventController {
     @Autowired
     EventService eventService;
 
-//    @GetMapping("/event")
-//    public List<String> getEventByVenueIDandEventType(Integer VenueID, String EventType){
-//        return eventService.getEventByVenueIDandEventType(VenueID, EventType);
-//    }
+    @GetMapping("/event")
+    public List<Event> getEventByVenueIDandEventType(@RequestParam Integer id, @RequestParam String eventType){
+        return eventService.getEventByVenueIDandEventType(id, eventType);
+    }
     @GetMapping("/allev")
     public List<Event> getAllEvents(){
         return eventService.getAllEvents();

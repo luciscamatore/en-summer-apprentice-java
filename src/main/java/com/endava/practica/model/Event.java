@@ -16,78 +16,78 @@ public class Event implements Serializable {
     private Integer eventID;
     @ManyToOne
     @JoinColumn(name = "VenueID")
-    private Venue VenueID;
+    private Venue venueID;
 
     @ManyToOne
     @JoinColumn(name = "EventTypeID")
-    private EventType EventTypeID;
+    private EventType eventTypeID;
 
     @Column(name = "EventDescription")
-    private String EventDescription;
+    private String eventDescription;
 
     @Column(name = "EventName")
-    private String EventName;
+    private String eventName;
 
     @Column(name = "StartDate")
-    private LocalDateTime StartDate;
+    private LocalDateTime startDate;
 
     @Column(name = "EndDate")
-    private LocalDateTime EndDate;
+    private LocalDateTime endDate;
 
     public Integer getEventID() {
         return eventID;
     }
 
     public Venue getVenueID() {
-        return VenueID;
+        return venueID;
     }
 
     public EventType getEventTypeID() {
-        return EventTypeID;
+        return eventTypeID;
     }
 
     public String getEventDescription() {
-        return EventDescription;
+        return eventDescription;
     }
 
     public String getEventName() {
-        return EventName;
+        return eventName;
     }
 
     public LocalDateTime getStartDate() {
-        return StartDate;
+        return startDate;
     }
 
     public LocalDateTime getEndDate() {
-        return EndDate;
+        return endDate;
     }
 
     public void setEventID(Integer eventID) {
-        eventID = eventID;
+        this.eventID = eventID;
     }
 
     public void setVenueID(Venue venueID) {
-        VenueID = venueID;
+        this.venueID = venueID;
     }
 
     public void setEventTypeID(EventType eventTypeID) {
-        EventTypeID = eventTypeID;
+        this.eventTypeID = eventTypeID;
     }
 
     public void setEventDescription(String eventDescription) {
-        EventDescription = eventDescription;
+        this.eventDescription = eventDescription;
     }
 
     public void setEventName(String eventName) {
-        EventName = eventName;
+        this.eventName = eventName;
     }
 
     public void setStartDate(LocalDateTime startDate) {
-        StartDate = startDate;
+        this.startDate = startDate;
     }
 
     public void setEndDate(LocalDateTime endDate) {
-        EndDate = endDate;
+        this.endDate = endDate;
     }
 
     public Event() {

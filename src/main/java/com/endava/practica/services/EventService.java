@@ -29,8 +29,7 @@ public class EventService {
         return ev;
     }
 
-//    public List<String> getEventByVenueIDandEventType(Integer VenueID, String EventType){
-//        List<Event> events = new ArrayList<>();
-//
-//    }
+    public List<Event> getEventByVenueIDandEventType(Integer id, String eventType){
+        return eventRepository.findEventsByVenueID_VenueIDAndEventTypeID_EventTypeName(id, eventType);
+    }
 }

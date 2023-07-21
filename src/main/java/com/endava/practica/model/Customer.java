@@ -10,38 +10,42 @@ import java.util.List;
 public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer CustomerID;
+    private Integer customerID;
 
     @Column(name = "CustomerName")
-    private String CustomerName;
+    private String customerName;
 
     @Column(name = "Email")
-    private String Email;
+    private String email;
 
     public Integer getCustomerID() {
-        return CustomerID;
+        return customerID;
     }
 
     public void setCustomerID(Integer customerID) {
-        CustomerID = customerID;
+        customerID = customerID;
     }
 
     public String getCustomerName() {
-        return CustomerName;
+        return customerName;
     }
 
     public void setCustomerName(String customerName) {
-        CustomerName = customerName;
+        customerName = customerName;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        email = email;
     }
 
     public Customer() {
+    }
+
+    public Customer(Integer customerID) {
+        this.customerID = customerID;
     }
 }

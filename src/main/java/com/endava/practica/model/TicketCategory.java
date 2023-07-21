@@ -10,49 +10,49 @@ import java.util.List;
 public class TicketCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer TicketCategoryID;
+    private Integer ticketCategoryID;
 
     @ManyToOne
     @JoinColumn(name = "EventID")
-    private Event EventID;
+    private Event eventID;
 
     @Column(name = "Price")
-    private long Price;
+    private long price;
 
     @Column(name = "Description")
-    private String Description;
+    private String description;
 
 
     public Integer getTicketCategoryID() {
-        return TicketCategoryID;
+        return ticketCategoryID;
     }
 
     public void setTicketCategoryID(Integer ticketCategoryID) {
-        TicketCategoryID = ticketCategoryID;
+        this.ticketCategoryID = ticketCategoryID;
     }
 
     public Event getEventID() {
-        return EventID;
+        return eventID;
     }
 
     public void setEventID(Event eventID) {
-        EventID = eventID;
+        eventID = eventID;
     }
 
     public long getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(long price) {
-        Price = price;
+        this.price = price;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public TicketCategory() {
