@@ -1,9 +1,9 @@
-package com.endava.practica.model;
+package com.endava.practica.DTO;
 
 
 import java.time.LocalDateTime;
 
-public class PrettyOrders{
+public class OrdersDTO {
 
     Integer eventID;
     LocalDateTime orderedAt;
@@ -54,7 +54,7 @@ public class PrettyOrders{
         this.totalPrice = totalPrice;
     }
 
-    public PrettyOrders(Integer eventID, LocalDateTime orderedAt, Integer ticketCategoryID, long numberOfTickets, long totalPrice) {
+    public OrdersDTO(Integer eventID, LocalDateTime orderedAt, Integer ticketCategoryID, long numberOfTickets, long totalPrice) {
         this.eventID = eventID;
         this.orderedAt = orderedAt;
         this.ticketCategoryID = ticketCategoryID;
