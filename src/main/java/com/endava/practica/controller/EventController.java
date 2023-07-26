@@ -17,11 +17,11 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @GetMapping("/event")
+    @GetMapping("/eventById")
     public EventDTO getEventByVenueIDandEventType(@RequestParam Integer id, @RequestParam String eventType){
         return eventService.getEventByVenueIDandEventType(id, eventType);
     }
-    @GetMapping("/allev")
+    @GetMapping("/getAllEvents")
     public List<Event> getAllEvents(){
         return eventService.getAllEvents();
     }

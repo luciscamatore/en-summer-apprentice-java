@@ -1,10 +1,13 @@
 package com.endava.practica.model;
 
 import jakarta.persistence.*;
-
+import lombok.Getter;
+import lombok.Setter;
 import java.io.Serializable;
-import java.util.List;
 
+
+@Getter
+@Setter
 @Entity
 @Table(name = "Customer")
 public class Customer implements Serializable {
@@ -17,30 +20,6 @@ public class Customer implements Serializable {
 
     @Column(name = "Email")
     private String email;
-
-    public Integer getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(Integer customerID) {
-        customerID = customerID;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        customerName = customerName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        email = email;
-    }
 
     public Customer() {
     }

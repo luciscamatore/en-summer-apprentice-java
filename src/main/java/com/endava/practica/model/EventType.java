@@ -1,10 +1,12 @@
 package com.endava.practica.model;
 
 import jakarta.persistence.*;
-
+import lombok.Getter;
+import lombok.Setter;
 import java.io.Serializable;
-import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "EventType")
 public class EventType implements Serializable {
@@ -14,22 +16,6 @@ public class EventType implements Serializable {
 
     @Column(name = "EventTypeName")
     private String eventTypeName;
-
-    public Integer getEventTypeID() {
-        return eventTypeID;
-    }
-
-    public void setEventTypeID(Integer eventTypeID) {
-        this.eventTypeID = eventTypeID;
-    }
-
-    public String getEventTypeName() {
-        return eventTypeName;
-    }
-
-    public void setEventTypeName(String eventTypeName) {
-        this.eventTypeName = eventTypeName;
-    }
 
     public EventType() {
     }

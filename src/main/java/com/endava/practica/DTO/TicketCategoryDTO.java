@@ -1,34 +1,17 @@
 package com.endava.practica.DTO;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class TicketCategoryDTO {
 
     Integer ticketCategoryID;
     String description;
     long price;
-
-    public Integer getTicketCategoryID() {
-        return ticketCategoryID;
-    }
-
-    public void setTicketCategoryID(Integer ticketCategoryID) {
-        this.ticketCategoryID = ticketCategoryID;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public long getPrice() {
-        return price;
-    }
-
-    public void setPrice(long price) {
-        this.price = price;
-    }
 
     public TicketCategoryDTO(Integer ticketCategoryID, String description, long price) {
         this.ticketCategoryID = ticketCategoryID;

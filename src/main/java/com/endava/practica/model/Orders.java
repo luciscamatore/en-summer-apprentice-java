@@ -1,10 +1,13 @@
 package com.endava.practica.model;
 
 import jakarta.persistence.*;
-
+import lombok.Getter;
+import lombok.Setter;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Orders")
 public class Orders implements Serializable {
@@ -28,52 +31,6 @@ public class Orders implements Serializable {
 
     @Column(name = "TotalPrice")
     private long totalPrice;
-
-    public Integer getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(Integer orderID) {
-        orderID = orderID;
-    }
-
-    public Customer getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(Customer customerID) {
-        this.customerID = customerID;
-    }
-
-    public TicketCategory getTicketCategory() {
-        return ticketCategory;
-    }
-
-    public void setTicketCategory(TicketCategory ticketCategoryID) {
-        this.ticketCategory = ticketCategoryID;
-    }
-
-    public LocalDateTime getOrderdAt() {
-        return orderdAt;
-    }
-
-    public void setOrderdAt(LocalDateTime orderdAt) {
-        this.orderdAt = orderdAt;
-    }
-
-    public long getNumberOfTickets() {
-        return numberOfTickets;
-    }
-
-    public void setNumberOfTickets(long numberOfTickets){ this.numberOfTickets = numberOfTickets;}
-
-    public long getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(long totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 
     public Orders() {
     }
