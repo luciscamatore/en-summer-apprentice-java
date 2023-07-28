@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface OrdersRepository extends CrudRepository<Orders, Integer> {
-
-    List<Orders> findAllByCustomerID_CustomerID(Integer id);
+    List<Orders> findAllByCustomer_CustomerID(Integer customerID);
 }

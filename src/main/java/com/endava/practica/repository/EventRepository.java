@@ -9,9 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EventRepository extends CrudRepository<Event, Integer> {
-    List<Event> findAllByEventID(Integer EventID);
-    ResponseEntity<Event> findEventByEventID(Integer EventID);
 
-    Event findEventsByVenueID_VenueIDAndEventTypeID_EventTypeName(Integer id, String eventName);
-
+    Event findEventsByVenue_VenueIDAndEventType_EventTypeName(Integer id, String eventName);
 }

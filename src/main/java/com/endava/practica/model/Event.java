@@ -1,13 +1,19 @@
 package com.endava.practica.model;
 
 import jakarta.persistence.*;
-import org.springframework.boot.autoconfigure.web.WebProperties;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
+
+@Getter
+@Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Event")
 public class Event implements Serializable {
     @Id
@@ -16,11 +22,11 @@ public class Event implements Serializable {
     private Integer eventID;
     @ManyToOne
     @JoinColumn(name = "VenueID")
-    private Venue venueID;
+    private Venue venue;
 
     @ManyToOne
     @JoinColumn(name = "EventTypeID")
-    private EventType eventTypeID;
+    private EventType eventType;
 
     @Column(name = "EventDescription")
     private String eventDescription;
@@ -34,62 +40,4 @@ public class Event implements Serializable {
     @Column(name = "EndDate")
     private LocalDateTime endDate;
 
-    public Integer getEventID() {
-        return eventID;
-    }
-
-    public Venue getVenueID() {
-        return venueID;
-    }
-
-    public EventType getEventTypeID() {
-        return eventTypeID;
-    }
-
-    public String getEventDescription() {
-        return eventDescription;
-    }
-
-    public String getEventName() {
-        return eventName;
-    }
-
-    public LocalDateTime getStartDate() {
-        return startDate;
-    }
-
-    public LocalDateTime getEndDate() {
-        return endDate;
-    }
-
-    public void setEventID(Integer eventID) {
-        this.eventID = eventID;
-    }
-
-    public void setVenueID(Venue venueID) {
-        this.venueID = venueID;
-    }
-
-    public void setEventTypeID(EventType eventTypeID) {
-        this.eventTypeID = eventTypeID;
-    }
-
-    public void setEventDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
-    }
-
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
-
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(LocalDateTime endDate) {
-        this.endDate = endDate;
-    }
-
-    public Event() {
-    }
 }

@@ -1,11 +1,18 @@
 package com.endava.practica.model;
 
 import jakarta.persistence.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Orders")
 public class Orders implements Serializable {
     @Id
@@ -14,7 +21,7 @@ public class Orders implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "CustomerID")
-    private Customer customerID;
+    private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "TicketCategoryID")
@@ -29,70 +36,12 @@ public class Orders implements Serializable {
     @Column(name = "TotalPrice")
     private long totalPrice;
 
-    public Integer getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(Integer orderID) {
-        orderID = orderID;
-    }
-
-    public Customer getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(Customer customerID) {
-        this.customerID = customerID;
-    }
-
-    public TicketCategory getTicketCategory() {
-        return ticketCategory;
-    }
-
-    public void setTicketCategory(TicketCategory ticketCategoryID) {
-        this.ticketCategory = ticketCategoryID;
-    }
-
-    public LocalDateTime getOrderdAt() {
-        return orderdAt;
-    }
-
-    public void setOrderdAt(LocalDateTime orderdAt) {
-        this.orderdAt = orderdAt;
-    }
-
-    public long getNumberOfTickets() {
-        return numberOfTickets;
-    }
-
-    public void setNumberOfTickets(long numberOfTickets){ this.numberOfTickets = numberOfTickets;}
-
-    public long getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(long totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public Orders() {
-    }
-
     public Orders(Customer customerID, TicketCategory ticketCategoryID, LocalDateTime orderdAt, long numberOfTickets, long totalPrice) {
-
-        this.customerID = customerID;
+        this.customer = customerID;
         this.ticketCategory = ticketCategoryID;
         this.orderdAt = orderdAt;
         this.numberOfTickets = numberOfTickets;
         this.totalPrice = totalPrice;
     }
 
-    public Orders(Integer orderID, Customer customerID, TicketCategory ticketCategoryID, LocalDateTime orderdAt, long numberOfTickets, long totalPrice) {
-        this.orderID = orderID;
-        this.customerID = customerID;
-        this.ticketCategory = ticketCategoryID;
-        this.orderdAt = orderdAt;
-        this.numberOfTickets = numberOfTickets;
-        this.totalPrice = totalPrice;
-    }
 }
