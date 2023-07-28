@@ -6,12 +6,14 @@ import com.endava.practica.repository.CutomerRepository;
 import com.endava.practica.repository.OrdersRepository;
 import com.endava.practica.repository.TicketCategoryRepository;
 import com.endava.practica.services.OrdersService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api")
 public class OrdersController {
 
@@ -20,20 +22,13 @@ public class OrdersController {
     final TicketCategoryRepository ticketCategoryRepository;
     final CutomerRepository cutomerRepository;
 
-    public OrdersController(OrdersService ordersService, OrdersRepository ordersRepository, TicketCategoryRepository ticketCategoryRepository, CutomerRepository cutomerRepository) {
-        this.ordersService = ordersService;
-        this.ordersRepository = ordersRepository;
-        this.ticketCategoryRepository = ticketCategoryRepository;
-        this.cutomerRepository = cutomerRepository;
-    }
-
     @GetMapping("/orderByID")
-    public List<OrdersDTO> getOrderByID(@RequestParam Integer id){
-        return  ordersService.getOrderByCustomerID(id);
+    public List<OrdersDTO> getOrderByID(@RequestParam Integer customerID){
+        return  ordersService.getOrderByCustomerID(customerID);
     }
 
     @PostMapping("/placeOrder")
     public OrdersDTO postOrder(@RequestBody NewOrder newOrder){
-        return ordersService.getDTO(newOrder);
+        return ordersService.placeOrder(newOrder);
     }
 }

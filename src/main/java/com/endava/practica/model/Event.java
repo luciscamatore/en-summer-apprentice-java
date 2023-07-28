@@ -1,7 +1,9 @@
 package com.endava.practica.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -10,6 +12,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Event")
 public class Event implements Serializable {
     @Id
@@ -18,11 +22,11 @@ public class Event implements Serializable {
     private Integer eventID;
     @ManyToOne
     @JoinColumn(name = "VenueID")
-    private Venue venueID;
+    private Venue venue;
 
     @ManyToOne
     @JoinColumn(name = "EventTypeID")
-    private EventType eventTypeID;
+    private EventType eventType;
 
     @Column(name = "EventDescription")
     private String eventDescription;
@@ -36,6 +40,4 @@ public class Event implements Serializable {
     @Column(name = "EndDate")
     private LocalDateTime endDate;
 
-    public Event() {
-    }
 }

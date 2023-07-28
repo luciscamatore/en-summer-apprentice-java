@@ -1,7 +1,9 @@
 package com.endava.practica.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -9,6 +11,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Orders")
 public class Orders implements Serializable {
     @Id
@@ -17,7 +21,7 @@ public class Orders implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "CustomerID")
-    private Customer customerID;
+    private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "TicketCategoryID")
@@ -32,24 +36,12 @@ public class Orders implements Serializable {
     @Column(name = "TotalPrice")
     private long totalPrice;
 
-    public Orders() {
-    }
-
     public Orders(Customer customerID, TicketCategory ticketCategoryID, LocalDateTime orderdAt, long numberOfTickets, long totalPrice) {
-
-        this.customerID = customerID;
+        this.customer = customerID;
         this.ticketCategory = ticketCategoryID;
         this.orderdAt = orderdAt;
         this.numberOfTickets = numberOfTickets;
         this.totalPrice = totalPrice;
     }
 
-    public Orders(Integer orderID, Customer customerID, TicketCategory ticketCategoryID, LocalDateTime orderdAt, long numberOfTickets, long totalPrice) {
-        this.orderID = orderID;
-        this.customerID = customerID;
-        this.ticketCategory = ticketCategoryID;
-        this.orderdAt = orderdAt;
-        this.numberOfTickets = numberOfTickets;
-        this.totalPrice = totalPrice;
-    }
 }

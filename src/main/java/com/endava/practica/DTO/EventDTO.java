@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class EventDTO {
     Integer eventID;
     Venue venue;
@@ -22,15 +23,4 @@ public class EventDTO {
     LocalDateTime startDate;
     LocalDateTime endDate;
     List<TicketCategoryDTO> ticketCategory;
-
-    public EventDTO(Integer eventID, Venue venue, String type, String description, String name, LocalDateTime startDate, LocalDateTime endDate, List<TicketCategoryDTO> ticketCategory) {
-        this.eventID = eventID;
-        this.venue = venue;
-        this.type = type;
-        this.description = description;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.ticketCategory = (List<TicketCategoryDTO>) ticketCategory;
-    }
 }
