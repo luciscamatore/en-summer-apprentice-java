@@ -1,6 +1,5 @@
 package com.endava.practica.DTO;
 
-import com.endava.practica.DTO.TicketCategoryDTO;
 import com.endava.practica.model.Venue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

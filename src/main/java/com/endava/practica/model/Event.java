@@ -40,4 +40,12 @@ public class Event implements Serializable {
     @Column(name = "EndDate")
     private LocalDateTime endDate;
 
+    public Event(Venue venue, EventType eventType, String eventDescription, String eventName, LocalDateTime startDate, LocalDateTime endDate) {
+        this.venue = venue;
+        this.eventType = eventType;
+        this.eventDescription = eventDescription;
+        this.eventName = eventName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 }

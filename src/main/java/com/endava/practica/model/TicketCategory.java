@@ -28,4 +28,9 @@ public class TicketCategory implements Serializable {
     @Column(name = "Description")
     private String description;
 
+    public TicketCategory(Event event, long price, String description) {
+        this.event = event;
+        this.price = price;
+        this.description = description;
+    }
 }
