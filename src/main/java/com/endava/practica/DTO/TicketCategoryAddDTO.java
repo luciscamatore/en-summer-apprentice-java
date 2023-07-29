@@ -9,14 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TicketCategoryDTO {
+public class TicketCategoryAddDTO {
 
-    Integer ticketCategoryID;
+    String eventName;
     String description;
     long price;
-
-    public TicketCategoryDTO(String description, long price) {
-        this.description = description;
-        this.price = price;
-    }
 }

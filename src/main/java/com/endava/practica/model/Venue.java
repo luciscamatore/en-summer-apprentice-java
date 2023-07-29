@@ -28,4 +28,9 @@ public class Venue implements Serializable {
     @Column(name = "Capacity")
     private int capacity;
 
+    public Venue(String location, String type, int capacity) {
+        this.location = location;
+        this.type = type;
+        this.capacity = capacity;
+    }
 }
