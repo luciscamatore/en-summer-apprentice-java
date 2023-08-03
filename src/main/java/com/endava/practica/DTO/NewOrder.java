@@ -1,4 +1,4 @@
-package com.endava.practica.model;
+package com.endava.practica.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NewOrder {
+
     private Integer orderID;
     private Integer ticketCategoryID;
     private int numberOfTickets;

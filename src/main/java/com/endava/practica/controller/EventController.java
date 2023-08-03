@@ -23,11 +23,12 @@ public class EventController {
         return eventService.getEventByVenueIDandEventType(venueID, eventType);
     }
     @GetMapping("/getAllEvents")
-    public List<Event> getAllEvents(){
-        return eventService.getAllEvents();
+    public List<EventDTO> getAllEvents(){
+        List<EventDTO> ev = eventService.getAllEvents();
+        return ev;
     }
 
-    @PostMapping("/potEvent")
+    @PostMapping("/postEvent")
     public EventDTO postEvent(@RequestBody EventAddDTO eventAddDTO){
         return eventService.postEvents(eventAddDTO);
     }

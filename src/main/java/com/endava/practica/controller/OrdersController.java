@@ -1,7 +1,7 @@
 package com.endava.practica.controller;
 
+import com.endava.practica.DTO.NewOrder;
 import com.endava.practica.DTO.OrdersDTO;
-import com.endava.practica.model.*;
 import com.endava.practica.repository.CutomerRepository;
 import com.endava.practica.repository.OrdersRepository;
 import com.endava.practica.repository.TicketCategoryRepository;

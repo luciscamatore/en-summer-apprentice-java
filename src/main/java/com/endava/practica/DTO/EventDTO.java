@@ -16,9 +16,9 @@ import java.util.List;
 public class EventDTO {
     Integer eventID;
     Venue venue;
-    String type;
-    String description;
-    String name;
+    String eventType;
+    String eventDescription;
+    String eventName;
     LocalDateTime startDate;
     LocalDateTime endDate;
     List<TicketCategoryDTO> ticketCategory;

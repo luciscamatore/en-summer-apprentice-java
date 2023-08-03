@@ -1,7 +1,7 @@
 package com.endava.practica.services;
 
 import com.endava.practica.model.Customer;
-import com.endava.practica.model.NewOrder;
+import com.endava.practica.DTO.NewOrder;
 import com.endava.practica.model.Orders;
 import com.endava.practica.DTO.OrdersDTO;
 import com.endava.practica.model.TicketCategory;

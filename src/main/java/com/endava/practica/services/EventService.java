@@ -31,10 +31,20 @@ public class EventService {
         return eventRepository.findById(EventID).get();
     }
 
-    public List<Event> getAllEvents(){
-        List<Event> event = new ArrayList<>();
-        eventRepository.findAll().forEach(ev ->event.add(ev));
-        return event;
+    public List<EventDTO> getAllEvents(){
+        List<EventDTO> eventDTO = new ArrayList<>();
+        List<Event> events = new ArrayList<>();
+        eventRepository.findAll().forEach(ev ->events.add(ev));
+
+        for(Event ev : events) {
+            List<TicketCategory> ticketCategory = ticketCategoryRepository.findTicketCategoriesByEvent_EventID(ev.getEventID());
+            List<TicketCategoryDTO> ticketCategoryDTO = new ArrayList<>();
+            for (TicketCategory tk : ticketCategory) {
+                ticketCategoryDTO.add(new TicketCategoryDTO(tk.getTicketCategoryID(), tk.getDescription(), tk.getPrice()));
+            }
+            eventDTO.add(new EventDTO(ev.getEventID(), ev.getVenue(), ev.getEventType().getEventTypeName(), ev.getEventDescription(), ev.getEventName(), ev.getStartDate(), ev.getEndDate(), ticketCategoryDTO));
+        }
+        return eventDTO;
     }
 
     public EventDTO getEventByVenueIDandEventType(Integer venueID, String eventType){
