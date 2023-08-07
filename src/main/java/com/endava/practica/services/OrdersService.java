@@ -1,5 +1,7 @@
 package com.endava.practica.services;
 
+import com.endava.practica.DTO.OrderAndroidDTO;
+import com.endava.practica.DTO.OrderPatchDTO;
 import com.endava.practica.model.Customer;
 import com.endava.practica.DTO.NewOrder;
 import com.endava.practica.model.Orders;
@@ -23,6 +25,17 @@ public class OrdersService {
     final TicketCategoryRepository ticketCategoryRepository;
     final CutomerRepository cutomerRepository;
 
+    public List<OrderAndroidDTO> getAllOrders(){
+        System.out.println("am intrat in get all");
+        List<Orders> orders = (List<Orders>) ordersRepository.findAll();
+        List<OrderAndroidDTO> ordersDTO = new ArrayList<>();
+        List<TicketCategory> ticketCategories = (List<TicketCategory>) ticketCategoryRepository.findAll();
+        for(Orders o : orders){
+            ordersDTO.add(new OrderAndroidDTO(o.getOrderID(),ticketCategories.get(0).getEvent().getEventName(),o.getNumberOfTickets(),o.getTotalPrice()));
+        }
+        return ordersDTO;
+    }
+
     public List<OrdersDTO> getOrderByCustomerID(Integer customerID){
         List<Orders> orders = new ArrayList<>();
         List<OrdersDTO> ordersDTO = new ArrayList<>();
@@ -44,5 +57,24 @@ public class OrdersService {
         ordersRepository.save(placedOrder);
 
         return new OrdersDTO(placedOrder.getTicketCategory().getEvent().getEventID(), placedOrder.getOrderdAt(), placedOrder.getTicketCategory().getTicketCategoryID(), placedOrder.getNumberOfTickets(), placedOrder.getTotalPrice());
+    }
+
+    public void deleteOrder(Integer orderID) {
+        Orders order = ordersRepository.findOrdersByOrderID(orderID);
+        ordersRepository.delete(order);
+
+        if(ordersRepository.findOrdersByOrderID(orderID) == null)
+            System.out.println("Delete sucesfull");
+    }
+
+    public void patchOrder(OrderPatchDTO orderDTO){
+        Orders order = ordersRepository.findOrdersByOrderID(orderDTO.getOrderID());
+        TicketCategory ticketCategory = ticketCategoryRepository.findTicketCategoryByTicketCategoryID(orderDTO.getTicketCategoryID());
+
+        order.setNumberOfTickets(orderDTO.getNrTickets());
+        order.setTotalPrice(orderDTO.getNrTickets() * ticketCategory.getPrice());
+        order.setTicketCategory(ticketCategory);
+
+        ordersRepository.save(order);
     }
 }

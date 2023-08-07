@@ -1,6 +1,8 @@
 package com.endava.practica.controller;
 
 import com.endava.practica.DTO.NewOrder;
+import com.endava.practica.DTO.OrderAndroidDTO;
+import com.endava.practica.DTO.OrderPatchDTO;
 import com.endava.practica.DTO.OrdersDTO;
 import com.endava.practica.repository.CutomerRepository;
 import com.endava.practica.repository.OrdersRepository;
@@ -22,6 +24,10 @@ public class OrdersController {
     final TicketCategoryRepository ticketCategoryRepository;
     final CutomerRepository cutomerRepository;
 
+    @GetMapping("/getAllOrders")
+    public List<OrderAndroidDTO> getAllOrders(){
+        return ordersService.getAllOrders();
+    }
     @GetMapping("/orderByID")
     public List<OrdersDTO> getOrderByID(@RequestParam Integer customerID){
         return  ordersService.getOrderByCustomerID(customerID);
@@ -30,5 +36,17 @@ public class OrdersController {
     @PostMapping("/placeOrder")
     public OrdersDTO postOrder(@RequestBody NewOrder newOrder){
         return ordersService.placeOrder(newOrder);
+    }
+
+    @DeleteMapping("/deleteOrder")
+    public void deleteOrder(@RequestParam Integer orderID){
+        System.out.println("am intrat in delete");
+        ordersService.deleteOrder(orderID);
+    }
+
+    @PatchMapping("/patchOrder")
+    public void patchOrder(@RequestBody OrderPatchDTO orderDTO) {
+        System.out.println("am intrat in patch");
+        ordersService.patchOrder(orderDTO);
     }
 }
