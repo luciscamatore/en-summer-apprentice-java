@@ -38,15 +38,13 @@ public class OrdersController {
         return ordersService.placeOrder(newOrder);
     }
 
-    @DeleteMapping("/deleteOrder")
-    public void deleteOrder(@RequestParam Integer orderID){
-        System.out.println("am intrat in delete");
+    @DeleteMapping("/deleteOrder/{orderID}")
+    public void deleteOrder(@PathVariable Integer orderID){
         ordersService.deleteOrder(orderID);
     }
 
     @PatchMapping("/patchOrder")
     public void patchOrder(@RequestBody OrderPatchDTO orderDTO) {
-        System.out.println("am intrat in patch");
         ordersService.patchOrder(orderDTO);
     }
 }

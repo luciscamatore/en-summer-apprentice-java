@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class OrderPatchDTO {
     Integer orderID;
-    Integer ticketCategoryID;
+    String ticketCategoryDescription;
     long nrTickets;
 }
