@@ -1,10 +1,7 @@
 package com.endava.practica.DTO;
 
 import com.endava.practica.model.Venue;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class EventDTO {
     Integer eventID;
     Venue venue;

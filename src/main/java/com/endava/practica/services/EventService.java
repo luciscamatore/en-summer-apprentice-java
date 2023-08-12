@@ -31,6 +31,27 @@ public class EventService {
         return eventRepository.findById(EventID).get();
     }
 
+    public List<EventDTO> getEventsByFilter(String location, String  type){
+        List<EventDTO> eventDTOS = new ArrayList<>();
+        System.out.println(location + " " + type);
+        List<Event> events;
+        if(location.equals("location"))
+            events = eventRepository.findEventsByEventType_EventTypeName(type);
+        else if(type.equals("type"))
+            events = eventRepository.findEventsByVenue_Location(location);
+        else
+            events = eventRepository.findEventsByVenue_LocationAndEventType_EventTypeName(location, type);
+        for( Event ev : events){
+            List<TicketCategory> ticketCategory = ticketCategoryRepository.findTicketCategoriesByEvent_EventID(ev.getEventID());
+            List<TicketCategoryDTO> ticketCategoryDTO = new ArrayList<>();
+            for (TicketCategory tk : ticketCategory) {
+                ticketCategoryDTO.add(new TicketCategoryDTO(tk.getTicketCategoryID(), tk.getDescription(), tk.getPrice()));
+            }
+            eventDTOS.add(new EventDTO(ev.getEventID(), ev.getVenue(), ev.getEventType().getEventTypeName(), ev.getEventDescription(), ev.getEventName(), ev.getStartDate(), ev.getEndDate(), ticketCategoryDTO));
+        }
+        return eventDTOS;
+    }
+
     public List<EventDTO> getAllEvents(){
         List<EventDTO> eventDTO = new ArrayList<>();
         List<Event> events = new ArrayList<>();
