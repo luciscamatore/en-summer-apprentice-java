@@ -25,6 +25,9 @@ public class Customer implements Serializable {
     @Column(name = "Email")
     private String email;
 
+    @Column(name = "Password")
+    private String password;
+
     public Customer(Integer customerID) {
         this.customerID = customerID;
     }

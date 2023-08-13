@@ -4,7 +4,7 @@ import com.endava.practica.DTO.*;
 import com.endava.practica.model.Customer;
 import com.endava.practica.model.Orders;
 import com.endava.practica.model.TicketCategory;
-import com.endava.practica.repository.CutomerRepository;
+import com.endava.practica.repository.CustomerRepository;
 import com.endava.practica.repository.OrdersRepository;
 import com.endava.practica.repository.TicketCategoryRepository;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ public class OrdersService {
 
     final OrdersRepository ordersRepository;
     final TicketCategoryRepository ticketCategoryRepository;
-    final CutomerRepository cutomerRepository;
+    final CustomerRepository cutomerRepository;
 
     public List<OrderAndroidDTO> getAllOrders(){
         List<Orders> orders = (List<Orders>) ordersRepository.findAll();
@@ -34,19 +34,22 @@ public class OrdersService {
         return ordersDTO;
     }
 
-    public List<OrdersDTO> getOrderByCustomerID(Integer customerID){
+    public List<OrderAndroidDTO> getOrderByCustomerID(Integer customerID){
         List<Orders> orders = new ArrayList<>();
-        List<OrdersDTO> ordersDTO = new ArrayList<>();
+        List<OrderAndroidDTO> ordersDTO = new ArrayList<>();
         ordersRepository.findAllByCustomer_CustomerID(customerID).forEach(o->orders.add(o));
+        TicketCategory ticketCategories;
         for(Orders o : orders){
-            ordersDTO.add(new OrdersDTO(o.getTicketCategory().getEvent().getEventID(), o.getOrderdAt(),o.getTicketCategory().getTicketCategoryID(), o.getNumberOfTickets(), o.getTotalPrice()));
+            ticketCategories = ticketCategoryRepository.findTicketCategoryByTicketCategoryID(o.getTicketCategory().getTicketCategoryID());
+            TicketCategoryDTO ticketCategoryDTO = new TicketCategoryDTO(ticketCategories.getTicketCategoryID(),ticketCategories.getDescription(),ticketCategories.getPrice());
+            ordersDTO.add(new OrderAndroidDTO(o.getOrderID(),ticketCategoryDTO,ticketCategories.getEvent().getEventName(),o.getNumberOfTickets(),o.getTotalPrice()));
         }
         return ordersDTO;
     }
 
     public OrdersDTO placeOrder(NewOrder newOrder){
         LocalDateTime dateTime = LocalDateTime.now();
-        Customer customer = cutomerRepository.findById(1).get();
+        Customer customer = cutomerRepository.findById(newOrder.getCustomerID()).get();
 
         TicketCategory ticketCategory = ticketCategoryRepository.findTicketCategoryByEvent_EventIDAndDescription(newOrder.getEventID(), newOrder.getTicketCategoryDescription());
         System.out.println(ticketCategory.toString());

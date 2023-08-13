@@ -4,7 +4,7 @@ import com.endava.practica.DTO.NewOrder;
 import com.endava.practica.DTO.OrderAndroidDTO;
 import com.endava.practica.DTO.OrderPatchDTO;
 import com.endava.practica.DTO.OrdersDTO;
-import com.endava.practica.repository.CutomerRepository;
+import com.endava.practica.repository.CustomerRepository;
 import com.endava.practica.repository.OrdersRepository;
 import com.endava.practica.repository.TicketCategoryRepository;
 import com.endava.practica.services.OrdersService;
@@ -22,14 +22,14 @@ public class OrdersController {
     final OrdersService ordersService;
     final OrdersRepository ordersRepository;
     final TicketCategoryRepository ticketCategoryRepository;
-    final CutomerRepository cutomerRepository;
+    final CustomerRepository cutomerRepository;
 
     @GetMapping("/getAllOrders")
     public List<OrderAndroidDTO> getAllOrders(){
         return ordersService.getAllOrders();
     }
-    @GetMapping("/orderByID")
-    public List<OrdersDTO> getOrderByID(@RequestParam Integer customerID){
+    @GetMapping("/orderByID/{customerID}")
+    public List<OrderAndroidDTO> getOrderByID(@PathVariable Integer customerID){
         return  ordersService.getOrderByCustomerID(customerID);
     }
 

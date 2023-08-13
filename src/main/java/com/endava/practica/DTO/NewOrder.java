@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class NewOrder {
 
+    private Integer customerID;
     private Integer eventID;
     private String ticketCategoryDescription;
     private int numberOfTickets;
