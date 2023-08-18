@@ -18,6 +18,5 @@ public class EventAddDTO {
     public String eventDescription;
     public LocalDateTime startDate;
     public LocalDateTime endDate;
-
-
+    public String image;
 }

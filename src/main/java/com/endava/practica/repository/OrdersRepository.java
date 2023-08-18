@@ -11,4 +11,5 @@ import java.util.List;
 public interface OrdersRepository extends CrudRepository<Orders, Integer> {
     List<Orders> findAllByCustomer_CustomerID(Integer customerID);
     Orders findOrdersByOrderID(Integer orderID);
+    Orders findOrdersByCustomer_CustomerIDAndTicketCategory_Event_EventIDAndTicketCategory_Description(Integer customerID, Integer eventID, String description);
 }

@@ -1,5 +1,6 @@
 package com.endava.practica.services;
 
+import com.endava.practica.DTO.CustomerPostDTO;
 import com.endava.practica.model.Customer;
 import com.endava.practica.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
@@ -22,5 +23,9 @@ public class CustomerService {
 
     public List<Customer> getAllCustomers() {
         return (List<Customer>) customerRepository.findAll();
+    }
+
+    public void registerCustomer(CustomerPostDTO newCustomer) {
+        customerRepository.save(new Customer(newCustomer.getCustomerName(), newCustomer.getPassword(), newCustomer.getPassword()));
     }
 }

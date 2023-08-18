@@ -29,12 +29,12 @@ public class OrdersService {
         for(Orders o : orders){
             ticketCategories = ticketCategoryRepository.findTicketCategoryByTicketCategoryID(o.getTicketCategory().getTicketCategoryID());
             TicketCategoryDTO ticketCategoryDTO = new TicketCategoryDTO(ticketCategories.getTicketCategoryID(),ticketCategories.getDescription(),ticketCategories.getPrice());
-            ordersDTO.add(new OrderAndroidDTO(o.getOrderID(),ticketCategoryDTO,ticketCategories.getEvent().getEventName(),o.getNumberOfTickets(),o.getTotalPrice()));
+            ordersDTO.add(new OrderAndroidDTO(o.getOrderID(),ticketCategoryDTO,ticketCategories.getEvent().getEventName(),o.getOrderdAt(),o.getNumberOfTickets(),o.getTotalPrice()));
         }
         return ordersDTO;
     }
 
-    public List<OrderAndroidDTO> getOrderByCustomerID(Integer customerID){
+    public List<OrderAndroidDTO> getOrderByCustomerID(Integer customerID){  
         List<Orders> orders = new ArrayList<>();
         List<OrderAndroidDTO> ordersDTO = new ArrayList<>();
         ordersRepository.findAllByCustomer_CustomerID(customerID).forEach(o->orders.add(o));
@@ -42,20 +42,25 @@ public class OrdersService {
         for(Orders o : orders){
             ticketCategories = ticketCategoryRepository.findTicketCategoryByTicketCategoryID(o.getTicketCategory().getTicketCategoryID());
             TicketCategoryDTO ticketCategoryDTO = new TicketCategoryDTO(ticketCategories.getTicketCategoryID(),ticketCategories.getDescription(),ticketCategories.getPrice());
-            ordersDTO.add(new OrderAndroidDTO(o.getOrderID(),ticketCategoryDTO,ticketCategories.getEvent().getEventName(),o.getNumberOfTickets(),o.getTotalPrice()));
+            ordersDTO.add(new OrderAndroidDTO(o.getOrderID(),ticketCategoryDTO,ticketCategories.getEvent().getEventName(),o.getOrderdAt(),o.getNumberOfTickets(),o.getTotalPrice()));
         }
         return ordersDTO;
     }
 
     public OrdersDTO placeOrder(NewOrder newOrder){
+        Orders existingOrder = ordersRepository.findOrdersByCustomer_CustomerIDAndTicketCategory_Event_EventIDAndTicketCategory_Description(newOrder.getCustomerID(), newOrder.getEventID(), newOrder.getTicketCategoryDescription());
+        if(existingOrder != null){
+            TicketCategory ticketCategory = ticketCategoryRepository.findTicketCategoryByEvent_EventIDAndDescription(newOrder.getEventID(), newOrder.getTicketCategoryDescription());
+            existingOrder.setNumberOfTickets(existingOrder.getNumberOfTickets()+ newOrder.getNumberOfTickets());
+            existingOrder.setTotalPrice(existingOrder.getTotalPrice()+ (newOrder.getNumberOfTickets() * ticketCategory.getPrice()));
+            ordersRepository.save(existingOrder);
+            return new OrdersDTO(existingOrder.getTicketCategory().getEvent().getEventID(), existingOrder.getOrderdAt(), existingOrder.getTicketCategory().getTicketCategoryID(), existingOrder.getNumberOfTickets(), existingOrder.getTotalPrice());
+        }
+
         LocalDateTime dateTime = LocalDateTime.now();
         Customer customer = cutomerRepository.findById(newOrder.getCustomerID()).get();
-
         TicketCategory ticketCategory = ticketCategoryRepository.findTicketCategoryByEvent_EventIDAndDescription(newOrder.getEventID(), newOrder.getTicketCategoryDescription());
-        System.out.println(ticketCategory.toString());
-
         Orders placedOrder = new Orders(customer, ticketCategory, dateTime, newOrder.getNumberOfTickets(), newOrder.getNumberOfTickets()*ticketCategory.getPrice());
-
         ordersRepository.save(placedOrder);
 
         return new OrdersDTO(placedOrder.getTicketCategory().getEvent().getEventID(), placedOrder.getOrderdAt(), placedOrder.getTicketCategory().getTicketCategoryID(), placedOrder.getNumberOfTickets(), placedOrder.getTotalPrice());

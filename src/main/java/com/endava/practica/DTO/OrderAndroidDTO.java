@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,6 +16,7 @@ public class OrderAndroidDTO {
     Integer orderID;
     TicketCategoryDTO ticketCategoryDTO;
     String eventName;
+    LocalDateTime orderdAt;
     long nrTickets;
     long price;
 }

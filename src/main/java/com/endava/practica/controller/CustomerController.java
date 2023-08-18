@@ -1,5 +1,6 @@
 package com.endava.practica.controller;
 
+import com.endava.practica.DTO.CustomerPostDTO;
 import com.endava.practica.model.Customer;
 import com.endava.practica.repository.CustomerRepository;
 import com.endava.practica.services.CustomerService;
@@ -23,5 +24,10 @@ public class CustomerController {
     @GetMapping("/getAllCustomers")
     public List<Customer> getAllCustomers(){
         return customerService.getAllCustomers();
+    }
+
+    @PostMapping("/registerCustomer")
+    public void registerCustomer(@RequestBody CustomerPostDTO newCustomer){
+        customerService.registerCustomer(newCustomer);
     }
 }

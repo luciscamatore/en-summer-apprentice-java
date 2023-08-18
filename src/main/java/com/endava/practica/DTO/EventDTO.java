@@ -20,4 +20,5 @@ public class EventDTO {
     LocalDateTime startDate;
     LocalDateTime endDate;
     List<TicketCategoryDTO> ticketCategory;
+    String image;
 }

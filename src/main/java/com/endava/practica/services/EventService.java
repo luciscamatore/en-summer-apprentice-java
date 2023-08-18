@@ -27,13 +27,28 @@ public class EventService {
     final EventTypeRepository eventTypeRepository;
 
 
-    public Event getEventByID(Integer EventID){
-        return eventRepository.findById(EventID).get();
+    public List<EventDTO> getEventBatch(int batchNumber){
+        List<Event> allEvents = (List<Event>) eventRepository.findAll();
+        int numberOfBatches = allEvents.size() / 10;
+        List<EventDTO> eventDTOS = new ArrayList<>();
+        for( Event ev : allEvents){
+            List<TicketCategory> ticketCategory = ticketCategoryRepository.findTicketCategoriesByEvent_EventID(ev.getEventID());
+            List<TicketCategoryDTO> ticketCategoryDTO = new ArrayList<>();
+            for (TicketCategory tk : ticketCategory) {
+                ticketCategoryDTO.add(new TicketCategoryDTO(tk.getTicketCategoryID(), tk.getDescription(), tk.getPrice()));
+            }
+            eventDTOS.add(new EventDTO(ev.getEventID(), ev.getVenue(), ev.getEventType().getEventTypeName(), ev.getEventDescription(), ev.getEventName(), ev.getStartDate(), ev.getEndDate(), ticketCategoryDTO, ev.getImage()));
+        }
+        List<EventDTO> eventBatch = new ArrayList<>();
+        for(int i=(batchNumber*10)-10;i<batchNumber*10;i++){
+            if(eventDTOS.size() > i)
+                eventBatch.add(eventDTOS.get(i));
+        }
+        return eventBatch;
     }
 
     public List<EventDTO> getEventsByFilter(String location, String  type){
         List<EventDTO> eventDTOS = new ArrayList<>();
-        System.out.println(location + " " + type);
         List<Event> events;
         if(location.equals("location"))
             events = eventRepository.findEventsByEventType_EventTypeName(type);
@@ -47,7 +62,7 @@ public class EventService {
             for (TicketCategory tk : ticketCategory) {
                 ticketCategoryDTO.add(new TicketCategoryDTO(tk.getTicketCategoryID(), tk.getDescription(), tk.getPrice()));
             }
-            eventDTOS.add(new EventDTO(ev.getEventID(), ev.getVenue(), ev.getEventType().getEventTypeName(), ev.getEventDescription(), ev.getEventName(), ev.getStartDate(), ev.getEndDate(), ticketCategoryDTO));
+            eventDTOS.add(new EventDTO(ev.getEventID(), ev.getVenue(), ev.getEventType().getEventTypeName(), ev.getEventDescription(), ev.getEventName(), ev.getStartDate(), ev.getEndDate(), ticketCategoryDTO, ev.getImage()));
         }
         return eventDTOS;
     }
@@ -63,7 +78,7 @@ public class EventService {
             for (TicketCategory tk : ticketCategory) {
                 ticketCategoryDTO.add(new TicketCategoryDTO(tk.getTicketCategoryID(), tk.getDescription(), tk.getPrice()));
             }
-            eventDTO.add(new EventDTO(ev.getEventID(), ev.getVenue(), ev.getEventType().getEventTypeName(), ev.getEventDescription(), ev.getEventName(), ev.getStartDate(), ev.getEndDate(), ticketCategoryDTO));
+            eventDTO.add(new EventDTO(ev.getEventID(), ev.getVenue(), ev.getEventType().getEventTypeName(), ev.getEventDescription(), ev.getEventName(), ev.getStartDate(), ev.getEndDate(), ticketCategoryDTO, ev.getImage()));
         }
         return eventDTO;
     }
@@ -76,16 +91,14 @@ public class EventService {
         for (TicketCategory tk: ticketCategory) {
             ticketCategoryDTO.add(new TicketCategoryDTO(tk.getTicketCategoryID(),tk.getDescription(),tk.getPrice()));
         }
-        return new EventDTO(event.getEventID(), event.getVenue(),event.getEventType().getEventTypeName(), event.getEventDescription(),event.getEventName(),event.getStartDate(),event.getEndDate(),ticketCategoryDTO);
+        return new EventDTO(event.getEventID(), event.getVenue(),event.getEventType().getEventTypeName(), event.getEventDescription(),event.getEventName(),event.getStartDate(),event.getEndDate(),ticketCategoryDTO, event.getImage());
     }
 
     public EventDTO postEvents(EventAddDTO eventAddDTO){
         Venue venue = venueRepository.findVenueByLocation(eventAddDTO.venueLocation);
-
         EventType eventType = eventTypeRepository.findEventTypeByEventTypeID(eventAddDTO.eventTypeID);
 
-
-        Event createdEvent = new Event(venue, eventType, eventAddDTO.eventDescription, eventAddDTO.eventName, eventAddDTO.startDate, eventAddDTO.endDate);
+        Event createdEvent = new Event(venue, eventType, eventAddDTO.eventDescription, eventAddDTO.eventName, eventAddDTO.startDate, eventAddDTO.endDate, eventAddDTO.image);
 
         List<TicketCategory> ticketCategory = ticketCategoryRepository.findTicketCategoriesByEvent_EventID(createdEvent.getEventID());
         List<TicketCategoryDTO> ticketCategoryDTO = new ArrayList<>();
@@ -93,11 +106,24 @@ public class EventService {
             ticketCategoryDTO.add(new TicketCategoryDTO(tk.getTicketCategoryID(),tk.getDescription(),tk.getPrice()));
         }
         eventRepository.save(createdEvent);
-        return new EventDTO(createdEvent.getEventID(), createdEvent.getVenue(), createdEvent.getEventType().getEventTypeName(), createdEvent.getEventDescription(), createdEvent.getEventName(),createdEvent.getStartDate(),createdEvent.getEndDate(), ticketCategoryDTO);
+        return new EventDTO(createdEvent.getEventID(), createdEvent.getVenue(), createdEvent.getEventType().getEventTypeName(), createdEvent.getEventDescription(), createdEvent.getEventName(),createdEvent.getStartDate(),createdEvent.getEndDate(), ticketCategoryDTO, createdEvent.getImage());
     }
 
     public void deleteEvent(String eventName){
         Event event = eventRepository.findEventByEventName(eventName);
         eventRepository.delete(event);
+    }
+
+    public List<EventDTO> convertToDTO(List<Event> eventList){
+        List<EventDTO> eventDTOS = new ArrayList<>();
+        for(Event event : eventList) {
+            List<TicketCategory> ticketCategory = ticketCategoryRepository.findTicketCategoriesByEvent_EventID(event.getEventID());
+            List<TicketCategoryDTO> ticketCategoryDTO = new ArrayList<>();
+            for (TicketCategory tk : ticketCategory) {
+                ticketCategoryDTO.add(new TicketCategoryDTO(tk.getTicketCategoryID(), tk.getDescription(), tk.getPrice()));
+            }
+            eventDTOS.add(new EventDTO(event.getEventID(), event.getVenue(),event.getEventType().getEventTypeName(), event.getEventDescription(),event.getEventName(),event.getStartDate(),event.getEndDate(),ticketCategoryDTO, event.getImage()));
+        }
+        return eventDTOS;
     }
 }
